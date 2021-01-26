@@ -33,7 +33,8 @@ ui <- fluidPage(theme = shinytheme("readable"),
 server <- function(input, output) {
     getResults <- eventReactive(input$run, {
         # URL Encode the query
-        formatQuery <- URLencode(input$query, repeated = TRUE)
+        q <- paste(input$query, "LIMIT 500")
+        formatQuery <- URLencode(q, repeated = TRUE)
         # Build URL for GET request
         url <- paste0("https://data.wprdc.org/api/action/datastore_search_sql?sql=", formatQuery)
         # Run Get Request
